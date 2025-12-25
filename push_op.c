@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:09:59 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/24 15:49:14 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/25 15:34:19 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,18 @@ void	pp(t_stack *dest, t_stack *src)
 	src->size--;
 	temp = dest->head;
 	i = 0;
-	ft_printf("hi");
 	while (temp != NULL)
 	{
 		temp->index = i++;
+		temp->cost = -1;
+		temp = temp->next;
+	}
+	temp = src->head;
+	i = 0;
+	while (temp != NULL)
+	{
+		temp->index = i++;
+		temp->cost = -1;
 		temp = temp->next;
 	}
 	ft_printf("p%c\n", dest->name);

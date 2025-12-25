@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorted.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:06:00 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/24 15:51:28 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/25 20:02:53 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	three_elems(t_stack *a)
 		else
 			break ;
 	}
+	if (a->size == 3)
+	{
+		a->head->index = 0;
+		a->head->next->index = 1;
+		a->head->next->next->index = 2;
+	}
+	
 }
 
 int	is_sorted(t_stack *a)
@@ -115,7 +122,7 @@ int	search_closer(t_stack *a, t_node *node, int size)
 		x++;
 		temp = temp->next;
 	}
-	node->cost = all_costs(a->size, index, size, node->index);
+	index= all_costs(a->size, index, size, node->index);
 	return (index);
 }
 
@@ -123,20 +130,20 @@ int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
 {
 	if ((x > 0 && x < a->size - 1) || (y > 0 && y < b->size - 1))
 		return (0);
-	if (x == 0 && y == 1)
+	if (x == (a->size - 1))
 	{
-		swap(b);
-		if (a->head->value < b->head->value)
-			rotate(a, 1);
+		// if (a->tail->value < b->head->value)
+		rrotate(a, 1);
 	}
-	if ((x == a->size - 1) && (y == 0))
-		if (a->tail->value > b->head->value)
-			rrotate(a, 1);
-	if ((y == (b->size - 1)) && (x == 0))
+	if (y == (b->size - 1))
 		rrotate(b, 1);
 	pp(a, b);
-	if (a->head->value > a->head->next->value)
+	if (a->head->value > a->head->next->value )//&& a->head->value < a->tail->value)
+	{
 		swap(a);
+		a->head->index = 0;
+		a->head->next->index = 1;
+	}
 	return (1);
 }
 
@@ -241,18 +248,39 @@ void	sort(t_stack *a, t_stack *b)
 	while (a->size > 3)
 		pp(b, a);
 	three_elems(a);
+	// t_node *p = a->head;
+	// while (p)
+	// {
+		
+	// 	ft_printf("%d %d\n",p->index, p->value);
+	// 	p = p->next;
+	// }
 	while (b->size > 0)
 	{
 		temp = b->head;
-		while (temp)
+		while (temp != NULL)
 		{
-			index_a = search_closer(a, temp, b->size);
+			temp->cost = search_closer(a, temp, b->size);
+			// ft_printf("cost of index %d = %d\n",temp->index,temp->cost);
+			// ft_printf(" cost of value %d = %d\n", temp->value,temp->cost);
 			temp = temp->next;
 		}
 		index_b = lowest_cost(b);
+		// ft_printf("index b %d ", index_b);
 		index_a = set_best_index(a, b, index_b);
+		// ft_printf("index a %d\n", index_a);
 		make_operas(a, b, index_a, index_b);
+		// t_node *p = a->head;
+		// while (p)
+		// {
+			
+		// 	ft_printf("i %d %d\n",p->index, p->value);
+	// 		p = p->next;
+	// 	}
+	// 	getchar();    
 	}
+	while (a->head->value > a->head->next->value)
+		rotate(a, 1);
 	while (a->head->value > a->tail->value)
 		rotate(a, 1);
 }

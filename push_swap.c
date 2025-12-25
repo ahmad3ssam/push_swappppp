@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:09:57 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/24 14:40:39 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/25 20:03:35 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv)
 	// while (p)
 	// {
 		
-	// 	ft_printf("%d %d\n",p->index, p->value);
+	// 	ft_printf("%d \n", p->value);
 	// 	p = p->next;
 	// }
 	// while (a->head != NULL)
