@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahhammad <ahhammad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:10:11 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/24 14:40:13 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/27 00:25:46 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	rr(t_stack *a, t_stack *b);
 void	rrotate(t_stack *stack, int print);
 void	rrr(t_stack *a, t_stack *b);
 void	three_elems(t_stack *a);
-void	sort(t_stack *a, t_stack *b);
+void	ft_sort(t_stack *a, t_stack *b);
 int	is_sorted(t_stack *a);
 #endif

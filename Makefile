@@ -1,4 +1,4 @@
-SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sorted.c
+SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sort.c
 
 CC = cc
 
