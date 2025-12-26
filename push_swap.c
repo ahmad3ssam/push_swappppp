@@ -6,7 +6,7 @@
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:09:57 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/25 20:03:35 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/27 00:13:17 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(int argc, char **argv)
 	b->name = 'b';
 	if (create_a(a, argv, argc - 1) == -1)
 		return (free_all(a, b, -1));
-	sort(a, b);
+	ft_sort(a, b);
 	// t_node *p = a->head;
 	
 	// while (p)

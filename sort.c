@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorted.c                                           :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:06:00 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/25 20:02:53 by ahhammad         ###   ########.fr       */
+/*   Updated: 2025/12/27 00:13:07 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,14 @@ void	three_elems(t_stack *a)
 	{
 		a->head->index = 0;
 		a->head->next->index = 1;
-		a->head->next->next->index = 2;
+		a->tail->index = 2;
 	}
-	
 }
 
 int	is_sorted(t_stack *a)
 {
-	t_node	*temp1;
-	t_node	*temp2;
+	t_node		*temp1;
+	t_node		*temp2;
 
 	if (!a || a->size <= 1)
 		return (1);
@@ -59,30 +58,7 @@ int	is_sorted(t_stack *a)
 	return (1);
 }
 
-int	find_min_b(t_stack *b, int *num)
-{
-	int		index;
-	int		x;
-	t_node	*temp;
-
-	temp = b->head->next;
-	index = 0;
-	x = 1;
-	*num = b->head->value;
-	while (temp != NULL)
-	{
-		if (*num > temp->value)
-		{
-			index = x;
-			*num = temp->value;
-		}
-		x++;
-		temp = temp->next;
-	}
-	return (index);
-}
-
-int		all_costs(int size_a, int index_a, int size_b, int index_targ)
+int	all_costs(int size_a, int index_a, int size_b, int index_targ)
 {
 	if (index_a <= (size_a / 2) && index_targ <= (size_b / 2))
 		return (index_a + index_targ);
@@ -92,13 +68,6 @@ int		all_costs(int size_a, int index_a, int size_b, int index_targ)
 		return (index_a + (size_b - index_targ));
 	else
 		return ((size_a - index_a) + (size_b - index_targ));
-}
-
-int	ft_abs(int x, int y)
-{
-	if (x > y)
-		return (x - y);
-	return (y - x);
 }
 
 int	search_closer(t_stack *a, t_node *node, int size)
@@ -122,8 +91,8 @@ int	search_closer(t_stack *a, t_node *node, int size)
 		x++;
 		temp = temp->next;
 	}
-	index= all_costs(a->size, index, size, node->index);
-	return (index);
+	x = all_costs(a->size, index, size, node->index);
+	return (x);
 }
 
 int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
@@ -131,14 +100,11 @@ int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
 	if ((x > 0 && x < a->size - 1) || (y > 0 && y < b->size - 1))
 		return (0);
 	if (x == (a->size - 1))
-	{
-		// if (a->tail->value < b->head->value)
 		rrotate(a, 1);
-	}
 	if (y == (b->size - 1))
 		rrotate(b, 1);
 	pp(a, b);
-	if (a->head->value > a->head->next->value )//&& a->head->value < a->tail->value)
+	if (a->head->value > a->head->next->value)
 	{
 		swap(a);
 		a->head->index = 0;
@@ -151,8 +117,8 @@ void	make_operas(t_stack *a, t_stack *b, int x, int y)
 {
 	while (!check_in_tail0rhead(a, b, x, y))
 	{
-		while ((x > (a->size / 2) && (a->size - 1) >= x) &&
-			((y > (b->size / 2)) && (b->size - 1) >= y))
+		while ((x > (a->size / 2) && (a->size - 1) >= x) && (
+				(y > (b->size / 2)) && (b->size - 1) >= y))
 		{
 			x++;
 			y++;
@@ -186,7 +152,8 @@ void	make_operas(t_stack *a, t_stack *b, int x, int y)
 		}
 	}
 }
-int		lowest_cost(t_stack	*b)
+
+int	lowest_cost(t_stack	*b)
 {
 	int		index;
 	int		lowest;
@@ -207,12 +174,12 @@ int		lowest_cost(t_stack	*b)
 	return (index);
 }
 
-int		set_best_index(t_stack *a, t_stack *b, int index)
+int	set_best_index(t_stack *a, t_stack *b, int index)
 {
 	int		index_a;
-	t_node	*temp;
 	int		diff;
 	int		x;
+	t_node	*temp;
 	t_node	*temp2;
 
 	temp = b->head;
@@ -236,11 +203,10 @@ int		set_best_index(t_stack *a, t_stack *b, int index)
 	return (index_a);
 }
 
-void	sort(t_stack *a, t_stack *b)
+void	ft_sort(t_stack *a, t_stack *b)
 {
-	int	index_a;
-	int	index_b;
-	//int	num_b;
+	int		index_a;
+	int		index_b;
 	t_node	*temp;
 
 	if (is_sorted(a) || !b)
@@ -248,36 +214,17 @@ void	sort(t_stack *a, t_stack *b)
 	while (a->size > 3)
 		pp(b, a);
 	three_elems(a);
-	// t_node *p = a->head;
-	// while (p)
-	// {
-		
-	// 	ft_printf("%d %d\n",p->index, p->value);
-	// 	p = p->next;
-	// }
 	while (b->size > 0)
 	{
 		temp = b->head;
 		while (temp != NULL)
 		{
 			temp->cost = search_closer(a, temp, b->size);
-			// ft_printf("cost of index %d = %d\n",temp->index,temp->cost);
-			// ft_printf(" cost of value %d = %d\n", temp->value,temp->cost);
 			temp = temp->next;
 		}
 		index_b = lowest_cost(b);
-		// ft_printf("index b %d ", index_b);
 		index_a = set_best_index(a, b, index_b);
-		// ft_printf("index a %d\n", index_a);
 		make_operas(a, b, index_a, index_b);
-		// t_node *p = a->head;
-		// while (p)
-		// {
-			
-		// 	ft_printf("i %d %d\n",p->index, p->value);
-	// 		p = p->next;
-	// 	}
-	// 	getchar();    
 	}
 	while (a->head->value > a->head->next->value)
 		rotate(a, 1);
