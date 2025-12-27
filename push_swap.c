@@ -34,7 +34,7 @@ static	int	free_all(t_stack *a, t_stack *b, int check)
 	}
 	free(b);
 	if (check == -1)
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 	return (0);
 }
 

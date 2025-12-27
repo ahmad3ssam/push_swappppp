@@ -23,20 +23,19 @@ long	ft_atoi(char *str)
 	result = 0;
 	if (!str || str[0] == '\0')
 		return (LONG_MAX);
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = -1;
-		i++;
+		if (str[i++] == '-')
+			sign = -1;
 	}
 	while (ft_isdigit(str[i]))
 	{
 		result *= 10;
-		result += str[i] - '0';
-		i++;
+		result += str[i++] - '0';
+		if (result * -1 < INT_MIN || result * sign > INT_MAX)
+			return (LONG_MAX);
 	}
-	if (str[i] != '\0' || result * -1 < INT_MIN)
-		return (LONG_MAX);
-	else if (result * sign > INT_MAX)
-		return (LONG_MAX);
-	return (result * sign);
+	if (ft_isdigit(str[i - 1]) && str[i] == '\0')
+		return (result * sign);
+	return (LONG_MAX);
 }
