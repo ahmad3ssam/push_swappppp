@@ -42,7 +42,15 @@ void	rotate(t_stack *stack, int print);
 void	rr(t_stack *a, t_stack *b);
 void	rrotate(t_stack *stack, int print);
 void	rrr(t_stack *a, t_stack *b);
-void	three_elems(t_stack *a);
+
 void	ft_sort(t_stack *a, t_stack *b);
-int	is_sorted(t_stack *a);
+int		lowest_cost(t_stack	*b);
+int		all_costs(int size_a, int index_a, int size_b, int index_targ);
+int		search_closer(t_stack *a, t_node *node, int size);
+
+
+void	op_r(t_stack *a, t_stack *b, int *x, int *y);
+void	op_rr(t_stack *a, t_stack *b, int *x, int *y);
+void	switch_op(t_stack *stack, char c, int *num);
+
 #endif
