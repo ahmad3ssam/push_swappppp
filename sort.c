@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	three_elems(t_stack *a)
+static	void	three_elems(t_stack *a)
 {
 	if (!a || a->size == 0)
 		return ;
@@ -21,11 +21,11 @@ void	three_elems(t_stack *a)
 		if (a->head->value > a->tail->value)
 			rotate(a, 1);
 		else if (a->head->value > a->head->next->value)
-			swap(a);
+			swap(a, 1);
 		else if (a->head->next->value > a->tail->value)
 		{
 			rotate(a, 1);
-			swap(a);
+			swap(a, 1);
 			rrotate(a, 1);
 		}
 		else
@@ -106,7 +106,7 @@ int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
 	pp(a, b);
 	if (a->head->value > a->head->next->value)
 	{
-		swap(a);
+		swap(a, 1);
 		a->head->index = 0;
 		a->head->next->index = 1;
 	}
