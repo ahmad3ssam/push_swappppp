@@ -1,3 +1,4 @@
+#include "push_swap.h"
 
 int	search_closer(t_stack *a, t_node *node, int size)
 {
