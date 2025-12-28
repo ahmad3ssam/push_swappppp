@@ -31,7 +31,6 @@ fclean: clean
 	$(MAKE) fclean -C ./libft
 	$(MAKE) fclean -C ./ft_printf
 
-re :fclean $(NAME)
-	all
+re :fclean all
 
 .PHONY: all clean fclean re
