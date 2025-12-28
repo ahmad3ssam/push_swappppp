@@ -24,9 +24,8 @@ static	void	three_elems(t_stack *a)
 			swap(a, 1);
 		else if (a->head->next->value > a->tail->value)
 		{
-			rotate(a, 1);
 			swap(a, 1);
-			rrotate(a, 1);
+			rotate(a, 1);
 		}
 		else
 			break ;
@@ -62,10 +61,17 @@ static int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
 {
 	if ((x > 0 && x < a->size - 1) || (y > 0 && y < b->size - 1))
 		return (0);
-	if (x == (a->size - 1))
-		rrotate(a, 1);
 	if (y == (b->size - 1))
 		rrotate(b, 1);
+	if (x == a->size - 1)
+	{
+		if (a->tail->value < b->head->value)
+		{
+			pp(a, b);
+			return (1);
+		}
+		rrotate(a, 1);
+	}
 	pp(a, b);
 	if (a->head->value > a->head->next->value)
 	{
