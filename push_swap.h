@@ -32,7 +32,7 @@ typedef struct s_stack
 	t_node	*head;
 	t_node	*tail;
 	int		size;
-	char		name;
+	char	name;
 }	t_stack;
 
 void	pp(t_stack *dest, t_stack *src);
@@ -47,7 +47,8 @@ void	ft_sort(t_stack *a, t_stack *b);
 int		lowest_cost(t_stack	*b);
 int		all_costs(int size_a, int index_a, int size_b, int index_targ);
 int		search_closer(t_stack *a, t_node *node, int size);
-
+int		set_best_index(t_stack *a, t_stack *b, int index);
+void	final_touch(t_stack *a);
 
 void	op_r(t_stack *a, t_stack *b, int *x, int *y);
 void	op_rr(t_stack *a, t_stack *b, int *x, int *y);

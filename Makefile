@@ -1,4 +1,4 @@
-SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sort.c
+SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sort.c sort_utils1.c sort_utils2.c
 
 CC = cc
 
@@ -32,5 +32,6 @@ fclean: clean
 	$(MAKE) fclean -C ./ft_printf
 
 re :fclean $(NAME)
+	all
 
 .PHONY: all clean fclean re

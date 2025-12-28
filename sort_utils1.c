@@ -86,3 +86,32 @@ int	set_best_index(t_stack *a, t_stack *b, int index)
 	}
 	return (index_a);
 }
+
+void	final_touch(t_stack *a)
+{
+	t_node	*temp;
+	int		i;
+	int		value;
+
+	if (!a || a->size <= 3)
+		return ;
+	temp = a->head->next;
+	value = a->head->value;
+	i = 0;
+	while (temp && value < temp->value)
+	{
+		value = temp->value;
+		i++;
+		temp = temp->next;
+	}
+	while (i < a->size / 2 && i >= 0)
+	{
+		rotate(a, 1);
+		i--;
+	}
+	while (i >= a->size / 2 && i < a->size -1)
+	{
+		rrotate(a, 1);
+		i++;
+	}
+}

@@ -12,10 +12,26 @@
 
 #include "push_swap.h"
 
+static void	reset_index(t_stack *stack)
+{
+	t_node	*node;
+	int		i;
+
+	if (stack->size == 0)
+		return ;
+	node = stack->head;
+	i = 0;
+	while (node)
+	{
+		node->index = i;
+		i++;
+		node = node->next;
+	}
+}
+
 void	pp(t_stack *dest, t_stack *src)
 {
 	t_node	*temp;
-	int		i;
 
 	if (!src || !src->head)
 		return ;
@@ -29,21 +45,7 @@ void	pp(t_stack *dest, t_stack *src)
 		dest->tail = temp;
 	dest->size++;
 	src->size--;
-	temp = dest->head;
-	i = 0;
-	while (temp != NULL)
-	{
-		temp->index = i++;
-		temp->cost = -1;
-		temp = temp->next;
-	}
-	temp = src->head;
-	i = 0;
-	while (temp != NULL)
-	{
-		temp->index = i++;
-		temp->cost = -1;
-		temp = temp->next;
-	}
 	ft_printf("p%c\n", dest->name);
+	reset_index(dest);
+	reset_index(src);
 }

@@ -111,21 +111,5 @@ int	main(int argc, char **argv)
 	if (create_a(a, argv, argc - 1) == -1)
 		return (free_all(a, b, -1));
 	ft_sort(a, b);
-	// t_node *p = a->head;
-	
-	// while (p)
-	// {
-		
-	// 	ft_printf("%d \n", p->value);
-	// 	p = p->next;
-	// }
-	// while (a->head != NULL)
-	// 	pp(b,a);
-	// t_node *t = b->head;
-	// while (t)
-	// {
-	// 	ft_printf("%d %d\n",t->index, t->value);
-	// 	t = t->next;		
-	// }
 	free_all(a, b, 1);
 }

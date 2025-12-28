@@ -76,24 +76,24 @@ static int	check_in_tail0rhead(t_stack *a, t_stack *b, int x, int y)
 	return (1);
 }
 
-static void    make_operas(t_stack *a, t_stack *b, int x, int y)
+static void	make_operas(t_stack *a, t_stack *b, int x, int y)
 {
-        while (!check_in_tail0rhead(a, b, x, y))
-        {
-                if ((x > (a->size / 2) && (a->size - 1) >= x) && (
-                                (y > (b->size / 2)) && (b->size - 1) >= y))
-                        op_rr(a, b, &x,&y);
-                else if (((y > (b->size / 2)) && (b->size - 1) > y))
-                        switch_op(b , 'r', &y);
-                else if (((x > (a->size / 2) && (a->size - 1) > x)))
-                        switch_op(a, 'r', &x);
-                else if ((x <= (a->size / 2) && x > 0) && (y <= (b->size / 2) && y > 0))
-                        op_r(a, b, &x, &y);
-                else if (y <= (b->size / 2) && y > 0)
-                        switch_op(b, 'R',&y);
-                else if ((x <= (a->size / 2) && x > 0))
-                        switch_op(a, 'R',&x);
-        }
+	while (!check_in_tail0rhead(a, b, x, y))
+	{
+		if ((x > (a->size / 2) && (a->size - 1) >= x) && ((
+					y > (b->size / 2)) && (b->size - 1) >= y))
+			op_rr(a, b, &x, &y);
+		else if (((y > (b->size / 2)) && (b->size - 1) > y))
+			switch_op(b, 'r', &y);
+		else if (((x > (a->size / 2) && (a->size - 1) > x)))
+			switch_op(a, 'r', &x);
+		else if ((x <= (a->size / 2) && x > 0) && (y <= (b->size / 2) && y > 0))
+			op_r(a, b, &x, &y);
+		else if (y <= (b->size / 2) && y > 0)
+			switch_op(b, 'R', &y);
+		else if ((x <= (a->size / 2) && x > 0))
+			switch_op(a, 'R', &x);
+	}
 }
 
 void	ft_sort(t_stack *a, t_stack *b)
@@ -119,8 +119,5 @@ void	ft_sort(t_stack *a, t_stack *b)
 		index_a = set_best_index(a, b, index_b);
 		make_operas(a, b, index_a, index_b);
 	}
-	while (a->head->value > a->head->next->value)
-		rotate(a, 1);
-	while (a->head->value > a->tail->value)
-		rotate(a, 1);
+	final_touch(a);
 }
