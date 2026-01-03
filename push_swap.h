@@ -6,7 +6,7 @@
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:10:11 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/27 00:25:46 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/01/03 16:24:03 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void	final_touch(t_stack *a);
 void	op_r(t_stack *a, t_stack *b, int *x, int *y);
 void	op_rr(t_stack *a, t_stack *b, int *x, int *y);
 void	switch_op(t_stack *stack, char c, int *num);
+
+int		undup(t_stack *stack, int num);
 
 #endif

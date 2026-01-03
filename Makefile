@@ -1,4 +1,5 @@
-SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sort.c sort_utils1.c sort_utils2.c
+SRCS = push_swap.c swap_op.c push_op.c rotate_op.c sort.c \
+		sort_utils1.c sort_utils2.c ft_undup.c
 
 CC = cc
 
@@ -7,17 +8,26 @@ OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = libpush.a
+EXEC = push_swap
+
+LIBFT = ./libft/libft.a
+PRINTF = ./ft_printf/libftprintf.a
 
 MAKE = make
 
-all: makeall
-	$(CC) push_swap.c libpush.a ./libft/libft.a ./ft_printf/libftprintf.a -o push_swap
-makeall: $(NAME)
-	$(MAKE) -C ./libft
-	$(MAKE) -C ./ft_printf
+all: $(EXEC)
+
+$(EXEC): $(NAME) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) push_swap.c $(NAME) $(LIBFT) $(PRINTF) -o $@
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	ar rcs $@ $^
+
+$(LIBFT):
+	$(MAKE) -C ./libft
+
+$(PRINTF):
+	$(MAKE) -C ./ft_printf
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

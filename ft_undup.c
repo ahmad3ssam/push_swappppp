@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_utils2.c                                      :+:      :+:    :+:   */
+/*   ft_undup.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/03 15:52:50 by ahhammad          #+#    #+#             */
-/*   Updated: 2026/01/03 15:55:17 by ahhammad         ###   ########.fr       */
+/*   Created: 2026/01/03 16:21:51 by ahhammad          #+#    #+#             */
+/*   Updated: 2026/01/03 16:24:33 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	switch_op(t_stack *stack, char c, int *num)
+int	undup(t_stack *stack, int num)
 {
-	if (c == 'r')
-	{
-		(*num)++;
-		rrotate(stack, 1);
-	}
-	else if (c == 'R')
-	{
-		(*num)--;
-		rotate(stack, 1);
-	}
-}
+	t_node	*temp;
 
-void	op_rr(t_stack *a, t_stack *b, int *x, int *y)
-{
-	(*x)++;
-	(*y)++;
-	rrr(a, b);
-}
-
-void	op_r(t_stack *a, t_stack *b, int *x, int *y)
-{
-	(*x)--;
-	(*y)--;
-	rr(a, b);
+	temp = stack->head;
+	while (temp != NULL)
+	{
+		if (temp->value == num)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
 }

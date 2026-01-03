@@ -6,7 +6,7 @@
 /*   By: ahhammad <ahhammad@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 22:09:57 by ahhammad          #+#    #+#             */
-/*   Updated: 2025/12/27 00:13:17 by ahhammad         ###   ########.fr       */
+/*   Updated: 2026/01/03 17:13:43 by ahhammad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static	int	free_all(t_stack *a, t_stack *b, int check)
 	t_node	*temp;
 	t_node	*current;
 
-	current = a->head;
+	current = NULL;
+	if (a)
+		current = a->head;
 	while (current)
 	{
 		temp = current;
@@ -25,7 +27,8 @@ static	int	free_all(t_stack *a, t_stack *b, int check)
 		free(temp);
 	}
 	free(a);
-	current = b->head;
+	if (b)
+		current = b->head;
 	while (current)
 	{
 		temp = current;
@@ -35,20 +38,6 @@ static	int	free_all(t_stack *a, t_stack *b, int check)
 	free(b);
 	if (check == -1)
 		write(2, "Error\n", 6);
-	return (0);
-}
-
-static int	undup(t_stack *stack, int num)
-{
-	t_node	*temp;
-
-	temp = stack->head;
-	while (temp != NULL)
-	{
-		if (temp->value == num)
-			return (1);
-		temp = temp->next;
-	}
 	return (0);
 }
 
@@ -79,6 +68,8 @@ static int	create_a(t_stack *a, char **list, int index)
 		if (num == LONG_MAX || undup(a, num) == 1)
 			return (-1);
 		node = malloc(sizeof(t_node));
+		if (!node)
+			return (-1);
 		node -> value = num;
 		node -> index = index - 1;
 		node -> cost = -1;
@@ -89,6 +80,21 @@ static int	create_a(t_stack *a, char **list, int index)
 	return (1);
 }
 
+static t_stack	*stack(char name)
+{
+	t_stack		*temp;
+
+	temp = (t_stack *)malloc(sizeof(t_stack));
+	if (temp)
+	{
+		temp->head = NULL;
+		temp->tail = NULL;
+		temp->size = 0;
+		temp->name = name;
+	}
+	return (temp);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack		*a;
@@ -96,20 +102,12 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		return (-1);
-	a = (t_stack *)malloc(sizeof(t_stack));
-	b = (t_stack *)malloc(sizeof(t_stack));
+	a = stack ('a');
+	b = stack ('b');
 	if (!a || !b)
 		return (free_all(a, b, 1));
-	a->head = NULL;
-	a->tail = NULL;
-	a->size = 0;
-	a->name = 'a';
-	b->head = NULL;
-	b->tail = NULL;
-	b->size = 0;
-	b->name = 'b';
 	if (create_a(a, argv, argc - 1) == -1)
 		return (free_all(a, b, -1));
 	ft_sort(a, b);
-	free_all(a, b, 1);
+	return (free_all(a, b, 1));
 }
