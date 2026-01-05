@@ -10,8 +10,8 @@ This repository may also include small utility functions (e.g., ft_atoi, ft_abs)
 
 ## Features
 - Uses two stacks:
-  - stack A (initial stack)
-  - stack B (auxiliary stack)
+  - stack A
+  - stack B
 
 - Allowed operations:
   - sa, sb, ss – swap
@@ -29,7 +29,7 @@ This repository may also include small utility functions (e.g., ft_atoi, ft_abs)
 ## Data Structures
 Each node contains:
 - value (original number)
-- index (rank after indexing)
+- index
 - cost (number of operations required)
 - next (pointer to the next node, or NULL)
 
@@ -37,7 +37,7 @@ Each stack contains:
 - head (pointer to the first node)
 - tail (pointer to the last node)
 - name (A or B)
-- size
+- size (number of elements in the stack)
 
 ---
 
@@ -54,7 +54,7 @@ For each valid value, a new node is created and added to stack A.
 
 ### 2) Initial Push to Stack B
 All elements are pushed from stack A to stack B except the last three elements.
-The remaining three elements in stack A are sorted using minimal operations.
+The remaining three elements in stack A are sorted using the minimum number of operations.
 
 ### 3) Cost Calculation (B → A)
 For each element in stack B, two costs are calculated:
