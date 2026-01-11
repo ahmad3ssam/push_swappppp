@@ -40,13 +40,13 @@ int	search_closer(t_stack *a, t_node *node, int size)
 int	all_costs(int size_a, int index_a, int size_b, int index_targ)
 {
 	if (index_a <= (size_a / 2) && index_targ <= (size_b / 2))
-		return (index_a + index_targ);
+		return (max(index_a,index_targ));// make fun max
 	else if (index_a > (size_a / 2) && index_targ <= (size_b / 2))
 		return ((size_a - index_a) + index_targ);
 	else if (index_targ > (size_b / 2) && index_a <= (size_a / 2))
 		return (index_a + (size_b - index_targ));
 	else
-		return ((size_a - index_a) + (size_b - index_targ));
+		return (max((size_a - index_a),(size_b - index_targ)));// make fun max
 }
 
 int	lowest_cost(t_stack	*b)
